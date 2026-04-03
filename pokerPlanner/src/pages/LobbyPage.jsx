@@ -9,7 +9,7 @@ import "../styles/lobby.css";
 
 export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
   const [name, setName] = useState("");
-  const [mode, setMode] = useState(null); // null | "create" | "join"
+  const [mode, setMode] = useState(null); // null | "join"
   const [roomCode, setRoomCode] = useState("");
   const [error, setError] = useState("");
   const [joining, setJoining] = useState(false);
@@ -118,8 +118,8 @@ export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                if (mode === "create") handleCreate();
-                else if (mode === "join") handleJoin();
+                if (mode === "join") handleJoin();
+                else handleCreate();
               }
             }}
             maxLength={32}
@@ -131,9 +131,11 @@ export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
           <div className="lobby__actions">
             <button
               className="lobby__btn lobby__btn--primary"
-              onClick={() => setMode("create")}
+              onClick={handleCreate}
+              disabled={joining}
             >
-              <span className="lobby__btn-icon">♠</span> Create Room
+              <span className="lobby__btn-icon">♠</span>{" "}
+              {joining ? "Creating…" : "Create Room"}
             </button>
             <div className="lobby__divider">or</div>
             <button
@@ -141,26 +143,6 @@ export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
               onClick={() => setMode("join")}
             >
               <span className="lobby__btn-icon">♦</span> Join Room
-            </button>
-          </div>
-        )}
-
-        {mode === "create" && !incomingRoom && (
-          <div className="lobby__section">
-            <button
-              className="lobby__btn lobby__btn--primary lobby__btn--full"
-              onClick={handleCreate}
-            >
-              Deal Me In — Create Room
-            </button>
-            <button
-              className="lobby__back"
-              onClick={() => {
-                setMode(null);
-                setError("");
-              }}
-            >
-              ← Back
             </button>
           </div>
         )}
@@ -211,9 +193,7 @@ export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
 
         {error && <p className="lobby__error">{error}</p>}
 
-        <p className="lobby__hint">
-          Estimate stories together, in real time.
-        </p>
+        <p className="lobby__hint">Estimate stories together, in real time.</p>
       </div>
     </div>
   );
