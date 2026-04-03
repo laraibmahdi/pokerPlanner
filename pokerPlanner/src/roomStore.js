@@ -70,9 +70,10 @@ export async function saveRoom(roomId, room) {
   await updateDoc(roomRef(roomId), room);
 }
 
-// ── Subscribe (real-time) ─────────────────────────────────────────────────────
+// ── Subscribe (real-time) This is the core of why the app feels live
 
 export function subscribeToRoom(roomId, callback) {
+  // every change to the room is visible to all clients immediately
   const unsub = onSnapshot(roomRef(roomId), (snap) => {
     if (snap.exists()) {
       callback(snap.data());
