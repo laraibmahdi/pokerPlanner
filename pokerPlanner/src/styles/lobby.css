@@ -1,0 +1,279 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap");
+
+:root {
+  --felt: #0f2218;
+  --felt-light: #163121;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --red: #c0392b;
+  --cream: #f5f0e8;
+  --cream-dim: #d4cfc7;
+  --white: #ffffff;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--felt);
+  font-family: "DM Sans", sans-serif;
+  color: var(--cream);
+  min-height: 100vh;
+}
+
+.lobby {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Floating card decorations */
+.lobby__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.lobby__card {
+  position: absolute;
+  width: 80px;
+  height: 110px;
+  background: var(--cream);
+  border-radius: 8px;
+  opacity: 0.04;
+  animation: float 8s ease-in-out infinite;
+}
+
+.lobby__card--0 { top: 10%; left: 5%; animation-delay: 0s; transform: rotate(-15deg); }
+.lobby__card--1 { top: 20%; right: 8%; animation-delay: 1.5s; transform: rotate(12deg); }
+.lobby__card--2 { top: 60%; left: 3%; animation-delay: 3s; transform: rotate(5deg); }
+.lobby__card--3 { bottom: 10%; right: 5%; animation-delay: 0.8s; transform: rotate(-8deg); }
+.lobby__card--4 { bottom: 25%; left: 15%; animation-delay: 2.2s; transform: rotate(20deg); }
+.lobby__card--5 { top: 45%; right: 15%; animation-delay: 4s; transform: rotate(-20deg); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-18px) rotate(var(--r, 0deg)); }
+}
+
+/* Panel */
+.lobby__panel {
+  background: rgba(22, 49, 33, 0.9);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow), 0 0 0 1px rgba(201, 168, 76, 0.1) inset;
+  backdrop-filter: blur(12px);
+  animation: panelIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Logo */
+.lobby__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.lobby__logo-text {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+.lobby__logo-suit {
+  font-size: 1.1rem;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.lobby__logo-suit:nth-child(3),
+.lobby__logo-suit:nth-child(4) {
+  color: var(--red);
+  opacity: 0.7;
+}
+
+/* Invite banner */
+.lobby__invite-banner {
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--gold-light);
+}
+
+/* Field */
+.lobby__field {
+  margin-bottom: 1.25rem;
+}
+
+.lobby__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.lobby__input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: var(--cream);
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.lobby__input::placeholder {
+  color: rgba(245, 240, 232, 0.3);
+}
+
+.lobby__input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.lobby__input--code {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Actions */
+.lobby__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.lobby__divider {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  opacity: 0.5;
+}
+
+.lobby__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Buttons */
+.lobby__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.lobby__btn:active {
+  transform: scale(0.97);
+}
+
+.lobby__btn-icon {
+  font-size: 1.1rem;
+}
+
+.lobby__btn--primary {
+  background: var(--gold);
+  color: var(--felt);
+}
+
+.lobby__btn--primary:hover {
+  background: var(--gold-light);
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.35);
+}
+
+.lobby__btn--secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+.lobby__btn--secondary:hover {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: var(--gold);
+}
+
+.lobby__btn--full {
+  width: 100%;
+}
+
+.lobby__back {
+  background: none;
+  border: none;
+  color: var(--cream-dim);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  text-align: center;
+}
+
+.lobby__back:hover {
+  opacity: 1;
+}
+
+/* Error */
+.lobby__error {
+  background: rgba(192, 57, 43, 0.2);
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.875rem;
+  color: #f1948a;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Hint */
+.lobby__hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--cream-dim);
+  opacity: 0.4;
+  margin-top: 1.75rem;
+}
