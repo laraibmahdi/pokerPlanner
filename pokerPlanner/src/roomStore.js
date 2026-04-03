@@ -1,7 +1,3 @@
-// roomStore.js — Firestore backend
-// Drop-in replacement for the localStorage version.
-// All room state lives in Firestore so it works across any browser/device.
-
 import { doc, getDoc, setDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase";
 

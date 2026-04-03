@@ -14,6 +14,7 @@ export default function RoomPage({ roomId }) {
   const [myId, setMyId] = useState(null);
   const [copied, setCopied] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [initializing, setInitializing] = useState(true);
 
   // On mount: load room and identify self
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function RoomPage({ roomId }) {
     getRoom(roomId).then((loaded) => {
       if (!loaded) {
         setNotFound(true);
+        setInitializing(false);
         return;
       }
       setRoom(loaded);
@@ -32,6 +34,7 @@ export default function RoomPage({ roomId }) {
           sessionStorage.removeItem(`pp_me_${roomId}`);
         }
       }
+      setInitializing(false);
     });
   }, [roomId]);
 
@@ -83,6 +86,7 @@ export default function RoomPage({ roomId }) {
   };
 
   // If myId is not set yet, show "name required to enter" panel
+  if (initializing) return null;
   if (room && !myId) {
     return (
       <JoinPanel
