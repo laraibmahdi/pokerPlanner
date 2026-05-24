@@ -222,7 +222,6 @@ export default function RoomPage({ roomId }) {
                   </>
                 )} */}
                 <div className="room__result-votes">
-                  {/* This is where the frontend change has to be made */}
                   {[...room.members]
                     .sort((a, b) => parseFloat(a.vote) - parseFloat(b.vote))
                     .map((m) => (
