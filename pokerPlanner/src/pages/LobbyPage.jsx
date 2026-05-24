@@ -110,7 +110,7 @@ export default function LobbyPage({ onRoomCreated, onJoinRoom }) {
             id="name"
             className="lobby__input"
             type="text"
-            placeholder="e.g. Ada Lovelace"
+            placeholder="e.g. Alan Turing"
             value={name}
             onChange={(e) => {
               setName(e.target.value);

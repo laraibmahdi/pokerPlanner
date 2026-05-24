@@ -140,6 +140,10 @@ export default function RoomPage({ roomId }) {
           1
         )
       : null;
+  const sortVotes = room.members
+        .map((m) => parseFloat(m.vote)).sort((a, b) => a - b);
+
+  console.log(sortVotes);
 
   return (
     <div className="room">
@@ -211,14 +215,17 @@ export default function RoomPage({ roomId }) {
           {isRevealed && (
             <div className="room__result">
               <div className="room__result-inner">
-                {average && (
+                {/* {average && (
                   <>
                     <span className="room__result-label">Average</span>
                     <span className="room__result-value">{average}</span>
                   </>
-                )}
+                )} */}
                 <div className="room__result-votes">
-                  {room.members.map((m) => (
+                  {/* This is where the frontend change has to be made */}
+                  {[...room.members]
+                    .sort((a, b) => parseFloat(a.vote) - parseFloat(b.vote))
+                    .map((m) => (
                     <div key={m.id} className="room__result-vote">
                       <span className="room__result-vote-val">
                         {m.vote ?? "—"}
